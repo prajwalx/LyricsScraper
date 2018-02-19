@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Lyrics Scraper</title>
+    <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="row text-center">
+      <div class="col-md-12 ">
+        <h1>Lyrics Scraper</h1>
+        <input type="text" id="query"name="" value="">
+        <button type="button" class="btn btn-default"onclick="Search()">
+          search
+        </button>
+      </div>
+      <br><br><br><br><br><br>
+
+      <div class="col-md-12 ">
+      <pre id="lyrics"style="display: block;font-family: monospace;white-space: pre;margin: 1em 0;
+      font-size:16px;line-height:25px;"></pre>
+      </div>
+      <p>Special Thanks To MetroLyrics.com</p>
+    </div>
+
+    <script type="text/javascript">
+    function Search(){
+    var query=$('#query').val();
+    // query.replace(/ /g,"+");
+    // query.split(' ').join('+')
+    console.log(query);
+      $.get('/getmusic/'+query,function(data,status){
+        // alert('Data Received');
+        console.log(data);
+        if(data.length<3)
+        $("#lyrics").text('Lyrics Not Found ;(');
+        else
+        $("#lyrics").text(data);
+      });
+    }
+    </script>
+  </body>
+</html>
